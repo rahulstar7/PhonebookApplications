@@ -1,0 +1,68 @@
+package com.phonebook.service;
+
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.phonebook.repository.Phonebookrepository;
+import com.phonebook.exception.ResourceNotFoundException;
+import com.phonebook.model.Phonebook;
+
+@Service
+public class phonebookserviceImpl implements Phonebookservice{
+
+	@Autowired
+	private Phonebookrepository phonebookrepository;
+	
+
+	public phonebookserviceImpl(Phonebookrepository phonebookrepository) {
+		super();
+		this.phonebookrepository = phonebookrepository;
+	}
+
+	@Override
+	public Phonebook savePhonebook(Phonebook phonebook) {
+		return phonebookrepository.save(phonebook);
+	}
+
+	@Override
+	public List<Phonebook> getAllPhonebook() {
+		return phonebookrepository.findAll();
+	}
+
+	@Override
+	public Phonebook getPhonebookById(long id) {
+
+		return phonebookrepository.findById(id).orElseThrow(() -> 
+						new ResourceNotFoundException("Phonebook", "Id", id));
+		
+	}
+
+	@Override
+	public Phonebook updatePhonebook(Phonebook phonebook, long id) {
+		
+		// we need to check whether Phone book record with given id is exist in DB or not
+		Phonebook existingphonebook = phonebookrepository.findById(id).orElseThrow(
+				() -> new ResourceNotFoundException("Phonebook", "Id", id)); 
+		
+		existingphonebook.setFirstName(phonebook.getFirstName());
+		existingphonebook.setLastName(phonebook.getLastName());
+		existingphonebook.setEmail(phonebook.getEmail());
+		// save existing Phone book record to DB
+		phonebookrepository.save(existingphonebook);
+		return existingphonebook;
+	}
+
+	@Override
+	public void deletePhonebook(long id) {
+		
+		// check whether a employee exist in a DB or not
+		phonebookrepository.findById(id).orElseThrow(() -> 
+								new ResourceNotFoundException("Phonebook", "Id", id));
+		phonebookrepository.deleteById(id);
+	}
+	
+}

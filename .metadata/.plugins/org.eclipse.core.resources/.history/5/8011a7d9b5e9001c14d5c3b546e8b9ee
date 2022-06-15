@@ -1,0 +1,5 @@
+package com.phonebook.exception;
+
+public class ResourceNotFoundException {
+
+}

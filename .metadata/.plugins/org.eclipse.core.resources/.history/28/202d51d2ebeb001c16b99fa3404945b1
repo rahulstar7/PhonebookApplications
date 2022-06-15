@@ -1,0 +1,51 @@
+package com.phonebook.security;
+
+import org.springframework.boot.autoconfigure.graphql.security.GraphQlWebFluxSecurityAutoConfiguration;
+import org.springframework.context.annotation.Configuration;
+/*
+@Configuration
+@SuppressWarnings("deprecation")
+
+public class CustomeSecurity  extends GraphQlWebFluxSecurityAutoConfigurationy {
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		
+		auth.inMemoryAuthentication()
+		.withUser("rahulstar")
+		.password("rahulstar")
+		.roles("USER");
+		
+		auth.inMemoryAuthentication()
+		.withUser("sachin")
+		.password("sachin")
+		.roles("ADMIN");
+	
+	
+	
+	}		
+	
+	
+		@Bean
+		public PasswordEncoder getPasswordEncoder()
+		{
+			return NoOpPasswordEncoder.getInstance();
+		}
+		
+		
+		@Override
+		protected void configure(HttpSecurity http) throws Exception {
+		
+		http.authorizeHttpRequests()
+		.antMatchers("/admin").hasRole("ADMIN")
+		.antMatchers("/hello").hasRole("USER")
+	    .and()
+		.formLogin();
+		
+		
+		
+		}
+	}
+	
+
+*/
